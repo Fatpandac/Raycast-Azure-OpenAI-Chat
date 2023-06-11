@@ -1,7 +1,7 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
-  "name": "openai-client",
-  "title": "OpenAI Client",
+  "name": "openai-chat",
+  "title": "OpenAI Chat",
   "description": "A Universal OpenAI Client",
   "icon": "command-icon.png",
   "author": "Fatpandac",
