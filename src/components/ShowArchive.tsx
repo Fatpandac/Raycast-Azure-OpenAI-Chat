@@ -2,6 +2,7 @@ import { Action, ActionPanel, Icon, List, useNavigation } from "@raycast/api";
 import dayjs from "dayjs";
 import { useContext } from "react";
 import { ArchivesContext, HistoriesContext } from "../context";
+import { formatContent } from "../utils";
 
 export function ShowArchive() {
   const { histories, handleSetHistories } = useContext(HistoriesContext);
@@ -9,11 +10,12 @@ export function ShowArchive() {
   const { pop } = useNavigation();
 
   return (
-    <List>
+    <List isShowingDetail>
       {archives?.map((archive) => (
         <List.Item
           title={archive.archiveHistory[0].prompt}
           subtitle={dayjs(archive.date).format("YY/MM/DD HH:mm:ss")}
+          detail={<List.Item.Detail markdown={formatContent(archive.archiveHistory)} />}
           actions={
             <ActionPanel>
               <Action
