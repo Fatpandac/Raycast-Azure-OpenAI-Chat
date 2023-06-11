@@ -1,25 +1,26 @@
 import { Action, ActionPanel, Icon, List } from "@raycast/api";
-import { ShowDtail } from "./components";
-import { HistoriesContext } from "./context";
+import dayjs from "dayjs";
 import { useState } from "react";
-import { useAchive, useHistories } from "./hooks";
-import dayjs from "dayjs"
+import { ShowArchive, ShowDtail } from "./components";
+import { ArchivesContext, HistoriesContext } from "./context";
+import { useArchive, useHistories } from "./hooks";
 
 export default function Command() {
   const [input, setInput] = useState("");
   const { histories, handleSetHistories, clearHistories } = useHistories();
-  const { achives, handleSetAchives } = useAchive();
+  const { archives, setArchives, handleSetArchives } = useArchive();
 
   return (
-    <List onSearchTextChange={(text) => setInput(text)}>
+    <List onSearchTextChange={(text) => setInput(text)} searchBarPlaceholder="Input ask">
       {histories.map((history) => (
         <List.Item
-          title={history.prompt || "说点什么"}
+          title={history.prompt || "Ask somthing..."}
           subtitle={dayjs(history.date).format("YY/MM/DD HH:mm:ss")}
           actions={
             <ActionPanel>
               <Action.Push
                 title="Ask AI"
+                icon={Icon.Stars}
                 onPush={() => {
                   // clear input
                   setInput("");
@@ -31,20 +32,27 @@ export default function Command() {
                 }
               ></Action.Push>
               <Action
-                title="Achive History"
+                title="Archive History"
                 icon={Icon.Tray}
                 onAction={() => {
-                  handleSetAchives(histories);
+                  if (!histories[0].prompt) return;
+
+                  handleSetArchives(histories);
                   clearHistories();
                 }}
               ></Action>
-              <Action
-                title="Console Achives"
-                icon={Icon.AddPerson}
-                onAction={() => {
-                  console.log(achives);
-                }}
-              ></Action>
+              <Action.Push
+                title="Show Archives"
+                icon={Icon.List}
+                shortcut={{ modifiers: ["cmd"], key: "l" }}
+                target={
+                  <HistoriesContext.Provider value={{ histories, handleSetHistories }}>
+                    <ArchivesContext.Provider value={{ archives, setArchives }}>
+                      <ShowArchive />
+                    </ArchivesContext.Provider>
+                  </HistoriesContext.Provider>
+                }
+              ></Action.Push>
             </ActionPanel>
           }
         ></List.Item>

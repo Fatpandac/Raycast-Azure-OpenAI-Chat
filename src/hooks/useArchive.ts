@@ -1,38 +1,33 @@
 import { LocalStorage } from "@raycast/api";
 import { useEffect, useState } from "react";
-import type { History } from "../context";
+import type { Archive, History } from "../context";
 import dayjs from "dayjs";
 
-interface Achive {
-  date: number;
-  achiveHistory: History[];
-}
+const STORAGE_ARCHIVES_KEY = "Archives";
 
-const STORAGE_ACHIVES_KEY = "Achives";
-
-export function useAchive() {
-  const [achives, setAchives] = useState<Achive[]>([]);
+export function useArchive() {
+  const [archives, setArchives] = useState<Archive[]>([]);
 
   useEffect(() => {
     (async () => {
-      const storageAchive = JSON.parse((await LocalStorage.getItem(STORAGE_ACHIVES_KEY)) || "[]");
-      setAchives(storageAchive);
+      const storageArchive = JSON.parse((await LocalStorage.getItem(STORAGE_ARCHIVES_KEY)) || "[]");
+      setArchives(storageArchive);
     })();
   }, []);
 
   useEffect(() => {
     (async () => {
-      await LocalStorage.setItem(STORAGE_ACHIVES_KEY, JSON.stringify(achives));
-    })()
-  }, [achives])
+      await LocalStorage.setItem(STORAGE_ARCHIVES_KEY, JSON.stringify(archives.slice(0, 30)));
+    })();
+  }, [archives]);
 
-  const handleSetAchives = async (histories: History[]) => {
-    const newAchiveItem = {
+  const handleSetArchives = async (histories: History[]) => {
+    const newArchiveItem = {
       date: dayjs().valueOf(),
-      achiveHistory: histories,
+      archiveHistory: histories,
     };
-    setAchives([newAchiveItem, ...achives]);
+    setArchives([newArchiveItem, ...archives]);
   };
 
-  return { achives, handleSetAchives };
+  return { archives, handleSetArchives, setArchives };
 }
