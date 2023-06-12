@@ -9,10 +9,10 @@ export function MainView(props: { toggleMainView: () => void }) {
   const { histories, handleSetArchives, handleSetHistories, clearHistories } = useContext(IndexContext);
 
   return (
-    <List onSearchTextChange={(text) => setInput(text)} searchBarPlaceholder="Input ask">
+    <List onSearchTextChange={(text) => setInput(text)} searchBarPlaceholder="Input prompt">
       {histories.map((history) => (
         <List.Item
-          title={history.prompt || "Ask somthing..."}
+          title={history.prompt || "Ask me anything..."}
           subtitle={dayjs(history.date).format("YY/MM/DD HH:mm:ss")}
           actions={
             <ActionPanel>
@@ -33,8 +33,8 @@ export function MainView(props: { toggleMainView: () => void }) {
                 }
               ></Action.Push>
               <Action
-                title="Archive History"
-                icon={Icon.Tray}
+                title="Create New Chat"
+                icon={Icon.Message}
                 onAction={() => {
                   if (!histories[0].prompt) return;
 
@@ -48,7 +48,7 @@ export function MainView(props: { toggleMainView: () => void }) {
               ></Action.CopyToClipboard>
               <Action
                 title="Toggle Open Archives"
-                icon={Icon.List}
+                icon={Icon.Tray}
                 shortcut={{ modifiers: ["cmd"], key: "l" }}
                 onAction={props.toggleMainView}
               ></Action>
