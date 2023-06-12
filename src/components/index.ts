@@ -1,2 +1,4 @@
+export * from "./ArchivesView";
+export * from "./MainView";
 export * from "./ShowDetail";
-export * from "./ShowArchive";
+

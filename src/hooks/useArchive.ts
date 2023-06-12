@@ -26,7 +26,7 @@ export function useArchive() {
     })();
   }, [archives]);
 
-  const handleSetArchives = async (histories: History[]) => {
+  const handleSetArchives = (histories: History[]) => {
     const newArchiveItem = {
       date: dayjs().valueOf(),
       archiveHistory: histories,

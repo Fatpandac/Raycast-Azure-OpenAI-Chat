@@ -1,18 +1,11 @@
-import { Action, ActionPanel, Icon, List, Toast, showToast, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, Icon, List, Toast, showToast } from "@raycast/api";
 import dayjs from "dayjs";
-import { Archive, History } from "../hooks";
 import { formatContent } from "../utils";
+import { useContext } from "react";
+import { IndexContext } from "../context";
 
-interface ShowArchiveProps {
-  histories: History[];
-  archives: Archive[];
-  handleSetHistories: (histories: History[]) => void;
-  setArchives: React.Dispatch<React.SetStateAction<Archive[]>>;
-}
-
-export function ShowArchive(props: ShowArchiveProps) {
-  const { histories, archives, handleSetHistories, setArchives } = props;
-  const { pop } = useNavigation();
+export function ArchivesView(props: { toggleMainView: () => void }) {
+  const { histories, archives, handleSetHistories, setArchives } = useContext(IndexContext);
 
   return (
     <List isShowingDetail>
@@ -42,7 +35,7 @@ export function ShowArchive(props: ShowArchiveProps) {
                   );
 
                   showToast({ style: Toast.Style.Success, title: "Load Sucess" });
-                  pop();
+                  props.toggleMainView();
                 }}
               ></Action>
               <Action
@@ -53,8 +46,13 @@ export function ShowArchive(props: ShowArchiveProps) {
                   setArchives(newArchies);
 
                   showToast({ style: Toast.Style.Success, title: "Delete Sucess" });
-                  pop();
                 }}
+              ></Action>
+              <Action
+                title="Toggle Close Archives"
+                icon={Icon.Reply}
+                shortcut={{ modifiers: ["cmd"], key: "l" }}
+                onAction={props.toggleMainView}
               ></Action>
             </ActionPanel>
           }
