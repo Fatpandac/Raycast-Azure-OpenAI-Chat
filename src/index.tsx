@@ -41,6 +41,10 @@ export default function Command() {
                   clearHistories();
                 }}
               ></Action>
+              <Action.CopyToClipboard
+                shortcut={{modifiers: ["ctrl"], key: "c"}}
+                content={history.content}
+              ></Action.CopyToClipboard>
               <Action.Push
                 title="Show Archives"
                 icon={Icon.List}
