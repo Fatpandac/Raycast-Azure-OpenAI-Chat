@@ -42,8 +42,8 @@ export function ShowArchive() {
                 title="Delete Archive"
                 icon={Icon.Trash}
                 onAction={() => {
-                  const newAchies = archives.filter((item) => item.date !== archive.date);
-                  setArchives(newAchies);
+                  const newArchies = archives.filter((item) => item.date !== archive.date);
+                  setArchives(newArchies);
                 }}
               ></Action>
             </ActionPanel>
