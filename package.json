@@ -65,7 +65,8 @@
   "dependencies": {
     "@azure/openai": "^1.0.0-beta.2",
     "@raycast/api": "^1.53.2",
-    "dayjs": "^1.11.8"
+    "dayjs": "^1.11.8",
+    "openai": "^3.2.1"
   },
   "devDependencies": {
     "@raycast/eslint-config": "1.0.5",

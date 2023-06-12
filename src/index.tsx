@@ -42,7 +42,7 @@ export default function Command() {
                 }}
               ></Action>
               <Action.CopyToClipboard
-                shortcut={{modifiers: ["ctrl"], key: "c"}}
+                shortcut={{ modifiers: ["ctrl"], key: "c" }}
                 content={history.content}
               ></Action.CopyToClipboard>
               <Action.Push

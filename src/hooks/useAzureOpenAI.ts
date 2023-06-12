@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { AzureOpenAIConfig } from "../utils";
-import { AzureOpenAI } from "../utils";
+import { AzureOpenAI, generateMessages } from "../utils";
 import { useHistories } from "./useHistories";
 
 interface Options {
@@ -14,22 +14,7 @@ export default function useAzureOpenAI(config: UseAzureOpenAIConfig, prompt: str
   const [isLoading, setIsLoading] = useState(false);
   const { histories } = useHistories();
 
-  const messages = [
-    ...histories
-      .slice(0, 4)
-      .map((history) => [
-        {
-          role: "user",
-          content: history.prompt,
-        },
-        {
-          role: "assistant",
-          content: history.content,
-        },
-      ])
-      .flat(),
-    { role: "user", content: prompt },
-  ];
+  const messages = generateMessages(histories, prompt);
 
   const client = AzureOpenAI(config);
 
