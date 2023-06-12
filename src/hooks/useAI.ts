@@ -8,7 +8,7 @@ interface AppPreference {
   model: string;
 }
 
-export const useOpenAI = (prompt: string) => {
+export const useAI = (prompt: string) => {
   const appPreference = getPreferenceValues<AppPreference>();
 
   const serverMap = {

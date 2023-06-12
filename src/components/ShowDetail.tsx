@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { HistoriesContext } from "../context";
 import { Detail, clearSearchBar } from "@raycast/api";
 import { formatContent } from "../utils";
-import { useOpenAI } from "../hooks";
+import { useAI } from "../hooks";
 import dayjs from "dayjs";
 
 export function ShowDtail(props: { prompt: string; date?: number }) {
@@ -15,7 +15,7 @@ export function ShowDtail(props: { prompt: string; date?: number }) {
     return <Detail markdown={formatContent(histories.slice(searchPromptIdx, histories.length))} />;
   }
 
-  const { content, isLoading } = useOpenAI(props.prompt);
+  const { content, isLoading } = useAI(props.prompt);
 
   if (!isLoading) {
     const completeHistory = {
