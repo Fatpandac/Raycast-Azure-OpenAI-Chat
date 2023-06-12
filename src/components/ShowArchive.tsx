@@ -1,12 +1,17 @@
-import { Action, ActionPanel, Icon, List, useNavigation } from "@raycast/api";
+import { Action, ActionPanel, Icon, List, Toast, showToast, useNavigation } from "@raycast/api";
 import dayjs from "dayjs";
-import { useContext } from "react";
-import { ArchivesContext, HistoriesContext } from "../context";
+import { Archive, History } from "../hooks";
 import { formatContent } from "../utils";
 
-export function ShowArchive() {
-  const { histories, handleSetHistories } = useContext(HistoriesContext);
-  const { archives, setArchives } = useContext(ArchivesContext);
+interface ShowArchiveProps {
+  histories: History[];
+  archives: Archive[];
+  handleSetHistories: (histories: History[]) => void;
+  setArchives: React.Dispatch<React.SetStateAction<Archive[]>>;
+}
+
+export function ShowArchive(props: ShowArchiveProps) {
+  const { histories, archives, handleSetHistories, setArchives } = props;
   const { pop } = useNavigation();
 
   return (
@@ -20,6 +25,7 @@ export function ShowArchive() {
             <ActionPanel>
               <Action
                 title="Load Archive"
+                icon={Icon.RotateAntiClockwise}
                 onAction={() => {
                   const newHistories = archive.archiveHistory;
                   handleSetHistories(newHistories);
@@ -35,6 +41,7 @@ export function ShowArchive() {
                     ].filter((item) => item.archiveHistory[0].prompt !== "")
                   );
 
+                  showToast({ style: Toast.Style.Success, title: "Load Sucess" });
                   pop();
                 }}
               ></Action>
@@ -44,6 +51,9 @@ export function ShowArchive() {
                 onAction={() => {
                   const newArchies = archives.filter((item) => item.date !== archive.date);
                   setArchives(newArchies);
+
+                  showToast({ style: Toast.Style.Success, title: "Delete Sucess" });
+                  pop();
                 }}
               ></Action>
             </ActionPanel>

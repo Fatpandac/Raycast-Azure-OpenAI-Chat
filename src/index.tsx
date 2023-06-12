@@ -2,7 +2,6 @@ import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { ShowArchive, ShowDtail } from "./components";
-import { ArchivesContext, HistoriesContext } from "./context";
 import { useArchive, useHistories } from "./hooks";
 
 export default function Command() {
@@ -26,9 +25,12 @@ export default function Command() {
                   setInput("");
                 }}
                 target={
-                  <HistoriesContext.Provider value={{ histories, handleSetHistories }}>
-                    <ShowDtail prompt={input || history.prompt} date={history.date} />
-                  </HistoriesContext.Provider>
+                  <ShowDtail
+                    histories={histories}
+                    handleSetHistories={handleSetHistories}
+                    prompt={input || history.prompt}
+                    date={history.date}
+                  />
                 }
               ></Action.Push>
               <Action
@@ -50,11 +52,12 @@ export default function Command() {
                 icon={Icon.List}
                 shortcut={{ modifiers: ["cmd"], key: "l" }}
                 target={
-                  <HistoriesContext.Provider value={{ histories, handleSetHistories }}>
-                    <ArchivesContext.Provider value={{ archives, setArchives }}>
-                      <ShowArchive />
-                    </ArchivesContext.Provider>
-                  </HistoriesContext.Provider>
+                  <ShowArchive
+                    histories={histories}
+                    handleSetHistories={handleSetHistories}
+                    archives={archives}
+                    setArchives={setArchives}
+                  />
                 }
               ></Action.Push>
             </ActionPanel>

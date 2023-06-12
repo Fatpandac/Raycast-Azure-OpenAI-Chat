@@ -1,26 +1,29 @@
-import { useContext } from "react";
-import { HistoriesContext } from "../context";
 import { Detail, clearSearchBar } from "@raycast/api";
 import { formatContent } from "../utils";
-import { useAI } from "../hooks";
+import { History, useAI } from "../hooks";
 import dayjs from "dayjs";
 
-export function ShowDtail(props: { prompt: string; date?: number }) {
-  const { histories, handleSetHistories } = useContext(HistoriesContext);
+interface ShowDtailProps {
+  histories: History[];
+  handleSetHistories: (histories: History[]) => void;
+  prompt: string;
+  date: number;
+}
 
-  const searchPromptIdx = histories.findIndex(
-    (history) => history.prompt === props.prompt && history.date === props.date
-  );
+export function ShowDtail(props: ShowDtailProps) {
+  const { histories, handleSetHistories, prompt, date } = props;
+
+  const searchPromptIdx = histories.findIndex((history) => history.prompt === prompt && history.date === date);
   if (searchPromptIdx !== -1) {
     return <Detail markdown={formatContent(histories.slice(searchPromptIdx, histories.length))} />;
   }
 
-  const { content, isLoading } = useAI(props.prompt);
+  const { content, isLoading } = useAI(prompt);
 
   if (!isLoading) {
     const completeHistory = {
       date: dayjs().valueOf(),
-      prompt: props.prompt,
+      prompt: prompt,
       content,
     };
     handleSetHistories([completeHistory, ...(histories ?? []).filter((histories) => histories.content)]);

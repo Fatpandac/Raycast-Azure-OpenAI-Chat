@@ -1,6 +1,11 @@
 import { Cache } from "@raycast/api";
-import { History } from "../context";
 import { useState } from "react";
+
+export interface History {
+  date: number;
+  prompt: string;
+  content: string;
+}
 
 const DEFAULT_HISTORY = [{ date: new Date().getTime(), prompt: "", content: "" }];
 const CACHE_HISTORY_KEY = "History";

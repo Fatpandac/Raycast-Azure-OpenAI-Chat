@@ -1,7 +1,12 @@
 import { LocalStorage } from "@raycast/api";
 import { useEffect, useState } from "react";
-import type { Archive, History } from "../context";
 import dayjs from "dayjs";
+import { History } from "./useHistories";
+
+export interface Archive {
+  date: number;
+  archiveHistory: History[];
+}
 
 const STORAGE_ARCHIVES_KEY = "Archives";
 
