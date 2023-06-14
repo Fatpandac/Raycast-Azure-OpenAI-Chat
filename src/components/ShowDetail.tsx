@@ -1,4 +1,4 @@
-import { Detail, clearSearchBar } from "@raycast/api";
+import { Detail } from "@raycast/api";
 import { formatContent } from "../utils";
 import { History, useAI } from "../hooks";
 import dayjs from "dayjs";
@@ -27,7 +27,6 @@ export function ShowDtail(props: ShowDtailProps) {
       content,
     };
     handleSetHistories([completeHistory, ...(histories ?? []).filter((histories) => histories.content)]);
-    clearSearchBar();
   }
 
   return <Detail isLoading={isLoading} markdown={content} />;

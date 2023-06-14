@@ -1,15 +1,15 @@
 import { Action, ActionPanel, Icon, List } from "@raycast/api";
 import dayjs from "dayjs";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { IndexContext } from "../context";
 import { ShowDtail } from "./ShowDetail";
 
 export function MainView(props: { toggleMainView: () => void }) {
-  const [input, setInput] = useState("");
-  const { histories, handleSetArchives, handleSetHistories, clearHistories } = useContext(IndexContext);
+  const { input, setInput, histories, handleSetArchives, handleSetHistories, clearHistories } =
+    useContext(IndexContext);
 
   return (
-    <List searchText={input} onSearchTextChange={(text) => setInput(text)} searchBarPlaceholder="Input prompt">
+    <>
       {histories.map((history) => (
         <List.Item
           title={history.prompt || "Ask me anything..."}
@@ -19,10 +19,6 @@ export function MainView(props: { toggleMainView: () => void }) {
               <Action.Push
                 title="Ask AI"
                 icon={Icon.Stars}
-                onPush={() => {
-                  // clear input
-                  setInput("");
-                }}
                 target={
                   <ShowDtail
                     histories={histories}
@@ -35,10 +31,6 @@ export function MainView(props: { toggleMainView: () => void }) {
               <Action.Push
                 title="Regenerate"
                 icon={Icon.RotateClockwise}
-                onPush={() => {
-                  // clear input
-                  setInput("");
-                }}
                 target={
                   <ShowDtail
                     histories={histories}
@@ -50,7 +42,7 @@ export function MainView(props: { toggleMainView: () => void }) {
               ></Action.Push>
               <Action
                 title="Create New Chat"
-                shortcut={{modifiers: ["opt"], key: "enter"}}
+                shortcut={{ modifiers: ["opt"], key: "enter" }}
                 icon={Icon.Message}
                 onAction={() => {
                   if (!histories[0].prompt) return;
@@ -64,7 +56,7 @@ export function MainView(props: { toggleMainView: () => void }) {
                 content={history.content}
               ></Action.CopyToClipboard>
               <Action
-                title="Reedit Prompt"
+                title="Rewrite Prompt"
                 shortcut={{ modifiers: ["cmd"], key: "r" }}
                 icon={Icon.TextCursor}
                 onAction={() => setInput(history.prompt)}
@@ -79,6 +71,6 @@ export function MainView(props: { toggleMainView: () => void }) {
           }
         ></List.Item>
       ))}
-    </List>
+    </>
   );
 }

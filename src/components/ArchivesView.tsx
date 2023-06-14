@@ -8,7 +8,7 @@ export function ArchivesView(props: { toggleMainView: () => void }) {
   const { histories, archives, handleSetHistories, setArchives } = useContext(IndexContext);
 
   return (
-    <List isShowingDetail searchBarPlaceholder="Search Archives">
+    <>
       {archives?.map((archive) => (
         <List.Item
           title={archive.archiveHistory[0].prompt}
@@ -58,6 +58,6 @@ export function ArchivesView(props: { toggleMainView: () => void }) {
           }
         ></List.Item>
       ))}
-    </List>
+    </>
   );
 }
