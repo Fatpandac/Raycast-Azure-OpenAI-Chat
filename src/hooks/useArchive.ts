@@ -15,7 +15,7 @@ export function useArchive() {
 
   useEffect(() => {
     (async () => {
-      const storageArchive = JSON.parse((await LocalStorage.getItem(STORAGE_ARCHIVES_KEY)) || "[]");
+      const storageArchive: Archive[] = JSON.parse((await LocalStorage.getItem(STORAGE_ARCHIVES_KEY)) ?? "[]");
       setArchives(storageArchive);
     })();
   }, []);
