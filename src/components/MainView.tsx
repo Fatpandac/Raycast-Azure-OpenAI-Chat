@@ -50,7 +50,7 @@ export function MainView(props: { toggleMainView: () => void }) {
               ></Action.Push>
               <Action
                 title="Create New Chat"
-                shortcut={{modifiers: ["ctrl"], key: "enter"}}
+                shortcut={{modifiers: ["opt"], key: "enter"}}
                 icon={Icon.Message}
                 onAction={() => {
                   if (!histories[0].prompt) return;
@@ -60,16 +60,14 @@ export function MainView(props: { toggleMainView: () => void }) {
                 }}
               ></Action>
               <Action.CopyToClipboard
-                shortcut={{ modifiers: ["ctrl"], key: "c" }}
+                shortcut={{ modifiers: ["opt"], key: "c" }}
                 content={history.content}
               ></Action.CopyToClipboard>
               <Action
                 title="Reedit Prompt"
                 shortcut={{ modifiers: ["cmd"], key: "r" }}
                 icon={Icon.TextCursor}
-                onAction={() => {
-                  setInput(history.prompt);
-                }}
+                onAction={() => setInput(history.prompt)}
               ></Action>
               <Action
                 title="Toggle Open Archives"
