@@ -30,10 +30,6 @@
           "value": "OpenAI"
         },
         {
-          "title": "Raycast AI",
-          "value": "Raycast AI"
-        },
-        {
           "title": "Azure OpenAI",
           "value": "Azure OpenAI"
         }
