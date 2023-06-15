@@ -1,7 +1,8 @@
 import { Detail } from "@raycast/api";
-import { formatContent } from "../utils";
-import { History, useAI } from "../hooks";
 import dayjs from "dayjs";
+import { useEffect } from "react";
+import { History, useAI } from "../hooks";
+import { formatContent } from "../utils";
 
 interface ShowDtailProps {
   histories: History[];
@@ -19,6 +20,20 @@ export function ShowDtail(props: ShowDtailProps) {
   }
 
   const { content, isLoading } = useAI(prompt);
+
+  useEffect(() => {
+    return () => {
+      // When the generation process is cancelled, 
+      // save any content that was generated up to that point
+      const completeHistory = {
+        date: dayjs().valueOf(),
+        prompt: prompt,
+        content,
+      };
+
+      handleSetHistories([completeHistory, ...(histories ?? []).filter((histories) => histories.content)]);
+    }
+  }, [content])
 
   if (!isLoading) {
     const completeHistory = {

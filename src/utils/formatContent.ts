@@ -1,7 +1,16 @@
 import { History } from "../hooks";
 
-export const formatContent = (histories: History[]) => {
-  const content = histories.map((item) => `${item.content}\n` + `> ${item.prompt}\n\n`).join("");
+function generateLegalContent(content: string) {
+  // legalization code block
+  if ((content.match(/```/gm)?.length ?? 0) % 2 === 1) {
+    content = content.concat("\n```")
+  }
+
+  return content
+}
+
+export function formatContent(histories: History[]) {
+  const content = histories.map((item) => `${generateLegalContent(item.content)}\n` + `> ${item.prompt}\n\n`).join("");
 
   return content;
 };
