@@ -52,7 +52,7 @@
     },
     {
       "name": "model",
-      "title": "Modle",
+      "title": "Model",
       "type": "textfield",
       "required": false,
       "description": "Model for your service"

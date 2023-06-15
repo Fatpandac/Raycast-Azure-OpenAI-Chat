@@ -1,5 +1,5 @@
 import { ChatCompletionRequestMessageRoleEnum } from "openai";
-import type { History } from "../context";
+import { History } from "../hooks";
 
 interface GenerateMessagesOptions {
   contextMessageCount: number;
