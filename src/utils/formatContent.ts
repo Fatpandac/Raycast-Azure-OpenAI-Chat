@@ -10,7 +10,7 @@ function generateLegalContent(content: string) {
 }
 
 export function formatContent(histories: History[]) {
-  const content = histories.map((item) => `${generateLegalContent(item.content)}\n` + `> ${item.prompt}\n\n`).join("");
+  const content = histories.map((item) => `> ${item.prompt}\n\n` + `${generateLegalContent(item.content)}\n`).join("");
 
   return content;
 };
