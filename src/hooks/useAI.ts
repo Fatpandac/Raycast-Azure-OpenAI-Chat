@@ -2,11 +2,12 @@ import { getPreferenceValues } from "@raycast/api";
 import useAzureOpenAI from "./useAzureOpenAI";
 import useOpenAI from "./useOpenAI";
 
-interface AppPreference {
+export interface AppPreference {
   openAiType: "Azure OpenAI" | "OpenAI";
   endpoint: string;
   apiKey: string;
   model: string;
+  systemPrompt: string;
 }
 
 export const useAI = (prompt: string) => {

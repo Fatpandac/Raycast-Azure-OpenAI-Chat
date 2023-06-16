@@ -16,3 +16,4 @@ An OpenAI client that supports OpenAI and Azure OpenAI.
 Endpoint: `https://api.openai.com` by default. You can input an Azure endpoint if you choose to use Azure OpenAI.  
 API Key: Input the API Key for your OpenAI.  
 Model: Please provide the name of the OpenAI-supported model or enter the deployment name of your Azure OpenAI.
+System Prompt: Setup the prompt of system

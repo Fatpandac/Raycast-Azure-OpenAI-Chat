@@ -1,13 +1,16 @@
 import { ChatCompletionRequestMessageRoleEnum } from "openai";
-import { History } from "../hooks";
+import { AppPreference, History } from "../hooks";
+import { getPreferenceValues } from "@raycast/api";
 
 interface GenerateMessagesOptions {
   contextMessageCount: number;
 }
 
+const preferences = getPreferenceValues<AppPreference>();
+
 const SYSTEM_PROMPT = {
   role: "system",
-  content: "You are a helpful assistant. You return the code of markdown including the tag for the code language."
+  content: preferences.systemPrompt
 }
 
 export function generateMessages(histories: History[], prompt: string, options?: GenerateMessagesOptions) {

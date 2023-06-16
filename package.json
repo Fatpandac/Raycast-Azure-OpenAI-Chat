@@ -56,6 +56,14 @@
       "type": "textfield",
       "required": false,
       "description": "Model for your service"
+    },
+    {
+      "name": "systemPrompt",
+      "title": "System Prompt",
+      "type": "textfield",
+      "required": false,
+      "description": "Prompt of system for OpenAI",
+      "default": "You are a helpful assistant."
     }
   ],
   "dependencies": {
