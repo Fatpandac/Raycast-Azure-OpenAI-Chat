@@ -1,8 +1,8 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
   "name": "openai-chat",
-  "title": "OpenAI Chat",
-  "description": "A Universal OpenAI Client",
+  "title": "Azure OpenAI Chat",
+  "description": "A Azure OpenAI Client",
   "icon": "command-icon.png",
   "author": "Fatpandac",
   "categories": [
@@ -19,43 +19,25 @@
   ],
   "preferences": [
     {
-      "name": "openAiType",
-      "description": "Choose which AI service you are using",
-      "type": "dropdown",
-      "required": true,
-      "title": "OpenAI Type",
-      "data": [
-        {
-          "title": "OpenAI",
-          "value": "OpenAI"
-        },
-        {
-          "title": "Azure OpenAI",
-          "value": "Azure OpenAI"
-        }
-      ]
-    },
-    {
       "name": "endpoint",
       "title": "Endpoint",
       "type": "textfield",
-      "required": false,
-      "default": "https://api.openai.com",
+      "required": true,
       "description": "EndPoint of your service"
     },
     {
       "name": "apiKey",
       "title": "API Key",
       "type": "password",
-      "required": false,
+      "required": true,
       "description": "API key of your service"
     },
     {
-      "name": "model",
-      "title": "Model",
+      "name": "deployment",
+      "title": "Deployment",
       "type": "textfield",
-      "required": false,
-      "description": "Model for your service"
+      "required": true,
+      "description": "Name of your deployment"
     },
     {
       "name": "systemPrompt",
@@ -77,7 +59,7 @@
     "@types/node": "18.8.3",
     "@types/react": "18.0.9",
     "eslint": "^7.32.0",
-    "prettier": "^2.5.1",
+    "prettier": "^2.8.8",
     "typescript": "^4.4.3"
   },
   "scripts": {

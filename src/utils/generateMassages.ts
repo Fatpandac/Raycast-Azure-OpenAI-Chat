@@ -10,8 +10,8 @@ const preferences = getPreferenceValues<AppPreference>();
 
 const SYSTEM_PROMPT = {
   role: "system",
-  content: preferences.systemPrompt
-}
+  content: preferences.systemPrompt,
+};
 
 export function generateMessages(histories: History[], prompt: string, options?: GenerateMessagesOptions) {
   return [
